@@ -1,16 +1,7 @@
 <ion-view view-title="Home">
   <ion-pane>
     <ion-content class="has-header">
-      <ion-slide-box class="feature-slider" on-slide-changed="slideHasChanged($index)" >
-        <ion-slide data-ng-repeat="item in homeCtrl.slider_posts track by item.id" style="background-image:url('{{item.img}}');">
-          <div class="caption" data-ng-bind-html="item.title"  data-ui-sref="app.item({itemId: item.id})">
-          </div>
-        </ion-slide>
-      </ion-slide-box>
       <ion-list>
-        <ion-item class=" item-divider">
-          Recent Posts
-        </ion-item>
         <ion-item class="category-ion-item" data-ui-sref="app.item({itemId: item.id})" data-ng-repeat="item in homeCtrl.slider_posts track by item.id">
           <div class="row row-wrap category-items">
             <div data-ng-if="item.img" class="category-item-image col col-33">
