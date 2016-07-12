@@ -47,7 +47,7 @@ angular.module('srfAdMob', [])
 		}
 
 		$ionicPlatform.ready(AdMobInit);
-		$rootScope.$on(events.createBanner, createBanner());
+		$rootScope.$on(events.createBanner, createBanner);
 		$rootScope.$on(events.createFullScreenAd, createFullScreenAd);
 	}
 ]);
