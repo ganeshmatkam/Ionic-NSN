@@ -115,7 +115,8 @@ angular.module('invisionApp', ['ionic', 'ngCordova', 'srfSocialSharing', 'srfAdM
 		// if none of the above states are matched, use this as the fallback
 		$urlRouterProvider.otherwise(function($injector, $location) {
 			var state = $injector.get('$state');
-			state.go('app.slideshow', {'forceShow': false});
+			//state.go('app.slideshow', {'forceShow': false});
+			state.go('app.home', {});
 			return $location.path();
 		});
 	}
