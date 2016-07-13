@@ -9,8 +9,10 @@
       'itemsService',
       '$ionicLoading',
       '$ionicSlideBoxDelegate',
+      '$ionicPlatform',
       'appConfig',
-      function (itemsSvc, $ionicLoading, $ionicSlideBoxDelegate, appConfig) {
+      '$timeout',
+      function (itemsSvc, $ionicLoading, $ionicSlideBoxDelegate, $ionicPlatform, appConfig, $timeout) {
         'use strict';
 
         var vm = this;
@@ -32,6 +34,14 @@
         }).then(setSliderPosts)
           .finally(function () {
             $ionicLoading.hide();
+            $ionicPlatform.ready(function(){
+              if(window.analytics){
+                var pr = $timeout(function(){
+                  window.analytics.trackView('Home');
+                  $timeout.cancel(pr);
+                }, 500);
+              }
+            })
           });
 
         function setSliderPosts(response) {

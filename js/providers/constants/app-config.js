@@ -24,17 +24,20 @@ angular
 				adSize: 'SMART_BANNER',
 				offsetTopBar: false, // avoid overlapped by status bar, for iOS7+
 				bgColor: 'black', // color name, or '#RRGGBB'
-				isTesting: true, // set to true, to receiving test ad for testing purpose
+				isTesting: false, // set to true, to receiving test ad for testing purpose
 				autoShow: true, // auto show interstitial ad when loaded, set to false if prepare/show
 				Android: {
-					banner: 'ca-app-pub-1111111111111111/1111111111',
-					interstitial: 'ca-app-pub-1111111111111111/1111111111'
+					banner: 'pub-0661868660547898',
+					interstitial: 'pub-0661868660547898'
 				},
 				IOS: {
-					banner: 'ca-app-pub-1111111111111111/1111111111',
-					interstitial: 'ca-app-pub-1111111111111111/1111111111'
+					banner: '',
+					interstitial: ''
 				}
-			}
+			},
+      GoogleAnalytics : {
+        id : 'UA-62760667-2'
+      }
 		};
 
 		return appConfig;

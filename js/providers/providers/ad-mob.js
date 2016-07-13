@@ -3,51 +3,48 @@
  */
 angular.module('srfAdMob', [])
 
-.run([
-	'$ionicPlatform',
-	'appConfig',
-	'$window',
-	'$rootScope',
-	'events',
-	function ($ionicPlatform, appConfig, $window, $rootScope, events) {
-		'use strict';
+  .run([
+    '$ionicPlatform',
+    'appConfig',
+    '$window',
+    '$rootScope',
+    'events',
+    function ($ionicPlatform, appConfig, $window, $rootScope, events) {
+      'use strict';
 
-		function createBanner() {
-			try {
-				AdMob.createBanner();
-			} catch(e) {};
-		}
+      function createBanner() {
+        admob.createBannerView();
+        window.analytics.startTrackerWithId(appConfig.GoogleAnalytics.id);
+      }
 
-		function createFullScreenAd() {
-			try {
-				AdMob.showInterstitial();
-			} catch(e) {};
-		}
+      function createFullScreenAd() {
+        try {
+          admob.showInterstitial();
+        } catch (e) {
+        }
+        ;
+      }
 
-		function AdMobInit() {
-			if (appConfig.AdMob.enable && $window.AdMob) {
+      function AdMobInit() {
+        if (appConfig.AdMob.enable && admob) {
 
-				var AdMob = $window.AdMob,
-					platform = ionic.Platform.isAndroid() ? 'Android' : 'IOS',
-					AdMobOptions = {
-						bannerId: appConfig.AdMob[platform].banner,
-						interstitialId: appConfig.AdMob[platform].interstitial,
-						adSize: appConfig.AdMob.adSize,
-						position: AdMob.AD_POSITION.BOTTOM_CENTER,
-						offsetTopBar: appConfig.AdMob.offsetTopBar,
-						bgColor: appConfig.AdMob.bgColor,
-						isTesting: appConfig.AdMob.isTesting,
-						autoShow: appConfig.AdMob.autoShow
-					};
+          var AdMob = admob,
+            platform = ionic.Platform.isAndroid() ? 'Android' : 'IOS',
+            AdMobOptions = {
+              publisherId: appConfig.AdMob[platform].banner,
+              interstitialAdId: appConfig.AdMob[platform].interstitial,
+              isTesting: appConfig.AdMob.isTesting,
+              autoShowBanner: appConfig.AdMob.autoShow,
+              adSize : admob.AD_SIZE.SMART_BANNER
+            };
+          admob.setOptions(AdMobOptions);
 
-				AdMob.setOptions(AdMobOptions);
+          createBanner();
+        }
+      }
 
-				createBanner();
-			}
-		}
-
-		$ionicPlatform.ready(AdMobInit);
-		$rootScope.$on(events.createBanner, createBanner);
-		$rootScope.$on(events.createFullScreenAd, createFullScreenAd);
-	}
-]);
+      $ionicPlatform.ready(AdMobInit);
+      $rootScope.$on(events.createBanner, createBanner);
+      $rootScope.$on(events.createFullScreenAd, createFullScreenAd);
+    }
+  ]);

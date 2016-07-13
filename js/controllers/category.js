@@ -33,6 +33,9 @@ angular
 
 			function setCategory(response) {
 				vm.category = response;
+        if(window.analytics){
+            window.analytics.trackView(response.name);
+        }
 			}
 
 			function setItems(response) {
